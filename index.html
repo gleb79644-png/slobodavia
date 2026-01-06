@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Prata&family=Raleway:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Администратор онлайн-табло</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+</head>
+
+<body class="body">
+  <header class="header">
+    <div class="container header__container">
+      <div class="header__first-line">
+        <h1 class="header__title">
+          Онлайн-табло
+        </h1>
+        <form class="header__change-accept-form change-accept-form" id="change-accept-form">
+          <button class="change-accept-form__change-button button-reset" id="change-button" tabindex="2">
+            редактирование
+          </button>
+          <button class="change-accept-form__change-button button-reset hidden" id="cancel-button" tabindex="4">
+            отменить редактирование
+          </button>
+          <!-- disabled="true" -->
+          <button type="submit" class="change-accept-form__save-changes-button button-reset button-decoration"
+            id="save-button" disabled tabindex="3">
+            Сохранить изменения
+          </button>
+        </form>
+      </div>
+      <div class="header__second-line">
+        <form class="header__filter-form filter-form" id="filter-form">
+
+          <input type="text" placeholder="Поиск по направлению"
+            class="filter-form__filter-input filter-form__filter-input--decoration" id="filter-input" tabindex="1">
+
+        </form>
+      </div>
+      <div class="header__threed-line">
+        <form class="header__add-form add-form" id="add-form">
+          <h2 class="add-form__title">
+            Добавить рейс
+          </h2>
+          <div class="add-form__wrapper">
+            <div class="add-form__box add-form__box-date">
+              <input data-required="true" type="text" class="add-form__date-input add-form__input" placeholder="Дата"
+                id="date-input" tabindex="5">
+            </div>
+            <div class="add-form__box add-form__box-time">
+              <input data-required="true" type="text" class="add-form__time-input add-form__input" placeholder="Время"
+                id="time-input" tabindex="6">
+            </div>
+            <div class="add-form__box add-form__box-flight-direction">
+              <select data-required="true" data-forbidden-value="Направление"
+                class="add-form__flight-direction-select add-form__input" id="flight-direction-select" tabindex="7">
+                <option>Направление</option>
+                <option value="Санкт-Петербург">Санкт-Петербург</option>
+                <option value="Самара">Самара</option>
+                <option value="Москва DME">Москва DME</option>
+                <option value="Москва SVO">Москва SVO</option>
+                <option value="Казань">Казань</option>
+              </select>
+
+            </div>
+            <div class="add-form__box add-form__box-flight">
+              <input data-required="true" data-forbidden-value="запрет" type="text"
+                class="add-form__flight-input add-form__input" placeholder="Рейс" id="flight-input" tabindex="8">
+
+            </div>
+
+            <div class="add-form__box add-form__box-aviacompany">
+              <!-- НАСТРОЙКА при добавлении синхронизировать с main.js , addform 'submit' прописать новые пути до картинок-->
+              <select data-required="true" data-forbidden-value="Авиакомпания"
+                class="add-form__aviacompany-select add-form__input" id="aviacompany-select" tabindex="9">
+                <option>Авиакомпания</option>
+                <option value="Аэрофлот">Аэрофлот</option>
+                <option value="Россия">Россия</option>
+                <option value="Уральские Авиалинии">Уральские Авиалинии</option>
+                <option value="s7">s7</option>
+                <option value="Nordwind">Nordwind</option>
+              </select>
+
+            </div>
+            <div class="add-form__box add-form__box-status">
+              <select data-required="true" data-forbidden-value="Статус" class="add-form__status-select add-form__input"
+                id="status-select" tabindex="10">
+                <option>Статус</option>
+                <option value="Отменён">Отменён</option>
+                <option value="Регистрация">Регистрация</option>
+                <option value="В полёте">В полёте</option>
+                <option value="Посадка">Посадка</option>
+                <option value="Задерживается">Задерживается</option>
+                <option value="Прибыл">Прибыл</option>
+              </select>
+
+            </div>
+            <div class="add-form__box add-form__box-type">
+              <select data-forbidden-value="Тип" class="add-form__type-select add-form__input" id="type-select"
+                tabindex="11">
+                <option>Тип</option>
+                <option value="Вылет">Вылет</option>
+                <option value="Прилёт">Прилёт</option>
+              </select>
+
+            </div>
+          </div>
+          <button type="submit" class="add-form__add-button button-reset button-decoration" id="add-button"
+            tabindex="12">
+            Добавить
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </header>
+  <main class="main">
+
+    <form class="main__form-type form-type container form-type-container" id="form-type">
+      <button class="form-type__departure-button button-reset button-type" id="departure-button" tabindex="13">
+        Вылет
+      </button>
+      <button class="form-type__arrival-button button-reset button-type" id="arrival-button" tabindex="14">
+        Прилёт
+      </button>
+    </form>
+    <div class="container main-container">
+      <table class="main__table table" id="table">
+        <thead class="table__thead">
+          <tr class="table__row heading row">
+            <td class="row__item heading__item-0 inviseble">ID</td>
+            <td class="row__item heading__item-1">Дата</td>
+            <td class="row__item heading__item-2">Время</td>
+            <td class="row__item heading__item-3">Направление</td>
+            <td class="row__item heading__item-4">Рейс</td>
+            <td class="row__item heading__item-5">Авиакомпания</td>
+            <td class="row__item heading__item-6">Статус</td>
+            <td class="row__item heading__item-7"></td>
+            <td class="row__item heading__item-8 inviseble">Тип</td>
+          </tr>
+        </thead>
+
+        <tbody class="table__body" id="table-body">
+
+          <!-- Шаблон -->
+
+          <!-- <tr class="table__row row">
+            <td class="row__item row__item-0 inviseble">ID</td>
+            <td class="row__item row__item-1">27 апр.</td>
+            <td class="row__item row__item-2">08:55</td>
+            <td class="row__item row__item-3">Москва SVO</td>
+            <td class="row__item row__item-4">SU-1651</td>
+            <td class="row__item row__item-5"><img src="img/icon__aeroflot.png" alt=""></td>
+            <td class="row__item row__item-extra row__item-extra--adoptation">Статус</td>
+            <td class="row__item row__item-6 row__item-6--adoptation">
+              <select class="table__status-select hidden table__status-select--adoptation">
+                <option>Статус</option>
+                <option value="canceled">Отменён</option>
+                <option value="check-in">Регистрация</option>
+                <option value="in-flight">В полёте</option>
+                <option value="boarding">Посадка</option>
+                <option value="delay">Задерживается</option>
+                <option value="arrived">Прибыл</option>
+              </select>
+
+              <span class="table__status">Прибыл</span>
+            </td>
+            <td class="row__item row__item-7 hidden row__item-7--adoptation">
+              <button class="row__button-delete button-reset">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10" cy="10" r="9.54545" stroke="#DB2525" stroke-width="0.909091" />
+                  <path d="M6.65283 14.1528L14.1528 6.65283" stroke="#DB2525" stroke-width="0.981955"
+                    stroke-linecap="round" />
+                  <path d="M13.8472 14.1528L6.34717 6.65283" stroke="#DB2525" stroke-width="0.981955"
+                    stroke-linecap="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="row__item row__item-8 inviseble">Тип</td>
+          </tr> -->
+          <!-- Шаблон -->
+        </tbody>
+
+
+
+      </table>
+      <div class="main__info-message hidden info-message" id="empty-message">Пока нет ни одного рейса.</div>
+      <div class="main__info-message hidden info-message" id="search-message">Поиск по направлению не дал результатов.
+        Попоробуйте снова.</div>
+    </div>
+  </main>
+  <script type="module" src="js/admin.js"></script>
+</body>
+
+</html>
